@@ -3,4 +3,5 @@ this is a college project
 DONOT TOUCH
 
 Group 21
-Sundar mama
+
+nodemon is added use npm start for starting the server
