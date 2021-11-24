@@ -14,8 +14,9 @@ app.use('/css', express.static(__dirname + 'static/css'))
 app.use('/js', express.static(__dirname + 'static/js'))
 app.use('/img', express.static(__dirname + 'static/images'))
 
-app.set("view engine","ejs");
-
+// Set View's
+app.set('views', './Views');
+app.set('view engine', 'ejs');
 
 app.all("*", (req, res, next) => {
     res.cookie("XSRF-TOKEN", req.csrfToken());
