@@ -1,21 +1,24 @@
 {
   "name": "agrocares",
   "version": "1.0.0",
+  
   "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon  --experimental-specifier-resolution=node app.js"
   },
   "author": "vipul,yash,dhruv",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.25.0",
     "cookie-parser": "^1.4.6",
     "cookieparser": "^0.1.0",
     "csrf": "^3.1.0",
     "csurf": "^1.11.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "firebase": "^8.10.0",
     "gsap": "^3.8.0",
     "nodemon": "^2.0.15"
   }

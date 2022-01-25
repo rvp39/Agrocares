@@ -1,9 +1,16 @@
+
 var express = require("express");
 var app = express();
 const cookieParser = require("cookie-parser");
 const csrf = require("csurf");
 var bodyParser = require("body-parser");
 const csrfMiddleware = csrf({ cookie: true });
+const Firebase = require("firebase");
+import('./Firebase/config.mjs')
+
+
+
+
 
 app.use(cookieParser());
 app.use(csrfMiddleware);
@@ -24,6 +31,8 @@ app.all("*", (req, res, next) => {
   });
 
 
+//const db = firebase.firestore();
+//const User = db.collection("Users");
 
 app.get("/",function(req,res){
 
@@ -35,6 +44,9 @@ app.get("/home",function(req,res){
 });
 app._router.get('/login',(req,res)=>{
     res.render("login");
+});
+app._router.get('/signup',(req,res)=>{
+  res.render("signup");
 });
 
 
