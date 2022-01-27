@@ -48,6 +48,8 @@ app.get("/",function(req,res){
 app.get("/home",function(req,res){
     res.render("home");
 });
+
+//authentication
 app._router.get('/login',(req,res)=>{
     res.render("login");
 });
@@ -93,7 +95,10 @@ app.get("/sessionLogout", (req, res) => {
   res.redirect("/login");
 });
 
+app.get("/forum",function(req,res){
 
+  res.render("forum");
+});
 
 
 
