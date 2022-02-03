@@ -1,0 +1,19 @@
+body{
+    padding: 0;
+    margin: 0;
+}
+#container{
+    background-color: turquoise;
+    height: 100vh;
+    width: 1415px;
+    margin: 85px 0 0 0;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main  div{
+    width:800px;
+    background-color: white;
+
+}
