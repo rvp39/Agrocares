@@ -99,7 +99,10 @@ app.get("/forum",function(req,res){
 
   res.render("forum");
 });
+app.get("/farmguide",function(req,res){
 
+  res.render("farmguide");
+});
 
 
 
