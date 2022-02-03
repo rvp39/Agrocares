@@ -37,16 +37,14 @@
           
            <div class="form-inner">
 
-              <form action="#" class="signup">
+              <form action="#" class="signup" id="signup">
                  <div class="field">
-                    <input type="text" placeholder="Email Address" required>
+                    <input type="text" placeholder="Email Address" name="login"required>
                  </div>
                  <div class="field">
-                    <input type="password" placeholder="Password" required>
+                    <input type="password" placeholder="Password" name="password" required>
                  </div>
-                 <div class="field">
-                    <input type="password" placeholder="Confirm password" required>
-                 </div>
+                 
                  <div class="field btn">
                     <div class="btn-layer"></div>
                     <input type="submit" value="Signup">
@@ -58,24 +56,55 @@
            </div>
         </div>
      </div>
+     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
      <script>
-        const loginText = document.querySelector(".title-text .login");
-        const loginForm = document.querySelector("form.login");
-        const loginBtn = document.querySelector("label.login");
-        const signupBtn = document.querySelector("label.signup");
-        const signupLink = document.querySelector("form .signup-link a");
-        signupBtn.onclick = (()=>{
-          loginForm.style.marginLeft = "-50%";
-          loginText.style.marginLeft = "-50%";
+         const firebaseConfig = {
+            apiKey: "AIzaSyBChjbfDaGEYdTTe8b4d4CVVsdQYvLXIsg",
+            authDomain: "agrocares-9d407.firebaseapp.com",
+            projectId: "agrocares-9d407",
+            storageBucket: "agrocares-9d407.appspot.com",
+            messagingSenderId: "299439045102",
+            appId: "1:299439045102:web:1beb29d6701fe2af52b6ff",
+            measurementId: "G-38EZ7LT7LG"
+          };
+
+        firebase.initializeApp(firebaseConfig);
+
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+
+document
+  .getElementById("signup")
+  .addEventListener("submit", (event) => {
+    event.preventDefault();
+    const login = event.target.login.value;
+    const password = event.target.password.value;
+
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(login, password)
+      .then(({ user }) => {
+        return user.getIdToken().then((idToken) => {
+          return fetch("/sessionLogin", {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
+            },
+            body: JSON.stringify({ idToken }),
+          });
         });
-        loginBtn.onclick = (()=>{
-          loginForm.style.marginLeft = "0%";
-          loginText.style.marginLeft = "0%";
-        });
-        signupLink.onclick = (()=>{
-          signupBtn.click();
-          return false;
-        });
+      })
+      .then(() => {
+        return firebase.auth().signOut();
+      })
+      .then(() => {
+        window.location.assign("/profile");
+      });
+    return false;
+  });
      </script>
 </body>
 </html>

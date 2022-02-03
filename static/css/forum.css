@@ -1,0 +1,53 @@
+html,body{
+    display: grid;
+    padding: 0;
+    background-image: url('/images/amol-sonar-1KntWz6Hpgc-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100vh;
+  }
+  .shade{
+      z-index: -1;
+      background-color: #15151579;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      top: 0;
+      left: 0;
+
+  }
+  .container{
+      width: 800px;
+      min-height: 400px;
+     
+      margin-top: 85px;
+      margin-left: 325px;
+      margin-right: 320px;
+  }
+  #create{
+      background-color: white;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 15px;
+      padding: 22px 35px;
+      align-items: center;
+      
+
+  }
+#create form{
+    display: flex;
+    flex-direction: column;
+    width: 535px;
+    
+}
+
+#create form #author{
+    width: 200px;
+}
+#display div{
+    width: 100%;
+    min-height: max-content;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    margin-top: 27px;
+}
