@@ -72,6 +72,9 @@ app.get("/profile", function (req, res) {
 });
 app.post("/sessionLogin", (req, res) => {
   const idToken = req.body.idToken.toString();
+  if(error){
+    console.error();
+  }
 
   const expiresIn = 60 * 60 * 24 * 5 * 1000;
 

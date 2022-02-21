@@ -45,10 +45,13 @@ color: #000000;
     justify-content: space-around;      
     width: fit-content;
     height: fit-content;
+    padding-top: 5px;
 }
 .nav-links > li{
     padding: 10px 20px;
 }
+
+
 .button{
     width: fit-content;
     height: fit-content;
@@ -56,6 +59,7 @@ color: #000000;
     padding: 1px 10px;
     background: #228B22;
     border-radius: 5px;
+    margin: auto 15px;
 }
 .button-text{
     width: fit-content;
@@ -70,4 +74,7 @@ color: #000000;
 a{
     text-decoration: none;
     
+}
+.lsb{
+    display: flex;
 }
