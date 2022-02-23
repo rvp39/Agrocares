@@ -10,22 +10,40 @@
     <title>Login/signup</title>
 </head>
 <body>
-    <div id="nav">
-        <div class="nav-container">
-            <ul class="nav-items">
-               <a href="/"><li id="logo">Agrocares</li></a>
-                <ul class="nav-links">
-                    <li>link</li>
-                    <li>link</li>
-                    <li>link</li>
-                    <li>link</li>
-                </ul>
-                <li><div class="button">
-                   <p class="button-text"> Login</p>
-                </div></li>
-            </ul>
-        </div>
-    </div>
+   <div id="nav">
+      <div class="nav-container">
+          <ul class="nav-items">
+              <a href="/">
+                  <li id="logo">
+                      Agrocares
+                  </li>
+              </a>
+              <ul class="nav-links">
+                  <li><a href="/forum">Forum</a></li>
+                  <li>link</li>
+                  <li>link</li>
+                  <li>link</li>
+              </ul>
+              <li class="lsb">
+                  <div class="button">
+                 <a href="/signup">
+                     <p class="button-text"> 
+                         signup
+                      </p>
+                  </a>
+                  </div>
+                  <div class="button">
+                      <a href="/login">
+                          <p class="button-text"> 
+                              Login
+                          </p>
+                      </a>
+                      </div>
+              </li>
+              
+          </ul>
+      </div>
+  </div>
     <div class="wrapper">
         <div class="title-text">
           
@@ -70,41 +88,28 @@
             measurementId: "G-38EZ7LT7LG"
           };
 
-        firebase.initializeApp(firebaseConfig);
+         firebase.initializeApp(firebaseConfig);
 
-firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
+         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
-document
-  .getElementById("signup")
-  .addEventListener("submit", (event) => {
-    event.preventDefault();
-    const login = event.target.login.value;
-    const password = event.target.password.value;
+         document
+         .getElementById("signup")
+         .addEventListener("submit", (event) => {
+            event.preventDefault();
+            const login = event.target.login.value;
+            const password = event.target.password.value;
 
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(login, password)
-      .then(({ user }) => {
-        return user.getIdToken().then((idToken) => {
-          return fetch("/sessionLogin", {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              "CSRF-Token": Cookies.get("XSRF-TOKEN"),
-            },
-            body: JSON.stringify({ idToken }),
-          });
-        });
-      })
-      .then(() => {
-        return firebase.auth().signOut();
-      })
-      .then(() => {
-        window.location.assign("/profile");
-      });
-    return false;
-  });
+            firebase
+               .auth()
+               .createUserWithEmailAndPassword(login, password)
+               .then(() => {
+               return firebase.auth().signOut();
+               })
+               .then(() => {
+               window.location.assign("/login");
+               });
+            
+         });
      </script>
 </body>
 </html>
