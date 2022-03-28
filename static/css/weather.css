@@ -10,7 +10,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: url(./Background/noah-silliman-i2J9jnvaAbU-unsplash.jpg);
+    background-image: url(/images/noah-silliman-i2J9jnvaAbU-unsplash.jpg);
     background-size: cover;
     font-family: 'Open Sans', sans-serif;
 }
