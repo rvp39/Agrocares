@@ -106,7 +106,12 @@ app.get("/farmguide",function(req,res){
 
   res.render("farmguide");
 });
-
+app.get("/features",function(req,res){
+  res.render("features");
+});
+app.get("/weather",function(req,res){
+  res.render("weather");
+});
 
 
 
