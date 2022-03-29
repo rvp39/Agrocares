@@ -52,19 +52,19 @@ window.addEventListener('load', ()=> {
 
 
             if(id < 250){
-                wicon.src = "./icons/thunder.svg";
+                wicon.src = "/icons/thunder.svg";
             }
             else if(id < 350){
-                wicon.src = "./icons/rainy-7.svg";
+                wicon.src = "/icons/rainy-7.svg";
             }
             else if(id < 500){
-                wicon.src = "./icons/rainy-6.svg";
+                wicon.src = "/icons/rainy-6.svg";
             }
             else if(id === 800){
-                wicon.src = "./icons/day.svg";
+                wicon.src = "/icons/day.svg";
             }
             else if(id > 800){
-                wicon.src = "./icons/cloudy.svg";
+                wicon.src = "/icons/cloudy.svg";
             }
 
         })
