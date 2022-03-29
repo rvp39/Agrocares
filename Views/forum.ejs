@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,40 +12,47 @@
     <link rel="stylesheet" href="/css/forum.css">
     <title>Document</title>
 </head>
+
 <body>
     <div id="nav">
         <div class="nav-container">
             <ul class="nav-items">
-                <a href="/"><li id="logo">Agrocares</li></a>
+                <a href="/">
+                    <li id="logo">Agrocares</li>
+                </a>
                 <ul class="nav-links">
                     <li><a href="/">Home</a></li>
                     <li><a href="/forum">Forum</a></li>
                     <li><a href="/features">Features</a></li>
                     <li>Profile</li>
                 </ul>
-                <li><div class="button">
-                   <a href="/login"><p class="button-text"> Login</p></a>
-                </div></li>
+                <li>
+                    <div class="button">
+                        <a href="/login">
+                            <p class="button-text"> Login</p>
+                        </a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
-<div class="shade">
-    <div class="container">
-    <div id="create">
-        <form action="" id="add-post">
-            <input type="text" name="post" id="post" placeholder="Write post here...">
-            <input type="text" name="auth" id="auth" placeholder="author">
-            <input type="submit" value="Post">
-        </form>
-    </div>
-    <div id="display">
+    <div class="shade">
+        <div class="container">
+            <div id="create">
+                <form action="" id="add-post">
+                    <input type="text" name="post" id="post" placeholder="Write post here...">
+                    <input type="text" name="auth" id="auth" placeholder="author">
+                    <input type="submit" value="Post" id="submit">
+                </form>
+            </div>
+            <div id="display">
 
+            </div>
+        </div>
     </div>
-    </div>
-</div>
 
-<script>
-            const firebaseConfig = {
+    <script>
+        const firebaseConfig = {
             apiKey: "AIzaSyBChjbfDaGEYdTTe8b4d4CVVsdQYvLXIsg",
             authDomain: "agrocares-9d407.firebaseapp.com",
             projectId: "agrocares-9d407",
@@ -52,47 +60,47 @@
             messagingSenderId: "299439045102",
             appId: "1:299439045102:web:1beb29d6701fe2af52b6ff",
             measurementId: "G-38EZ7LT7LG"
-          };
+        };
 
-          firebase.initializeApp(firebaseConfig);
-          const db = firebase.firestore();
-          db.settings({ timestampsInSnapshots: true });
-          const postList = document.querySelector('#display');
-          const form = document.querySelector('#add-post');
-          function renderPost(doc){
-              let div = document.createElement('div');
-              let post = document.createElement('span');
-              let author=document.createElement('span');
-              let date=document.createElement('span');
-              div.setAttribute('data-id',doc.id);
-              post.textContent = doc.data().post;
-              author.textContent = doc.data().author;
-              date.textContent = doc.data().time;
-              div.appendChild(post);
-              div.appendChild(author);
-              div.appendChild(date);
-              postList.appendChild(div);
-          }
-          form.addEventListener('submit',(e)=>{
-              e.preventDefault();
-              db.collection('forum').add({
-                  post : form.post.value,
-                  author: form.auth.value,
-                  time : new Date()
-              });
-              form.post.value='';
-              form.auth.value='';
-              
-          })
-          // getting data
-         db.collection('forum').get().then(snapshot => {
-        snapshot.docs.forEach(doc => {
-         renderPost(doc);
-     });
- });
-</script>
-<script src="/static/js/import.js"></script>
-<script src="//code.tidio.co/mpdzdvjhz9xchfl4rqruup5ak5m6usxp.js" async></script>
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        db.settings({ timestampsInSnapshots: true });
+        const postList = document.querySelector('#display');
+        const form = document.querySelector('#add-post');
+        function renderPost(doc) {
+            let div = document.createElement('div');
+            let post = document.createElement('span');
+            let author = document.createElement('span');
+            let date = document.createElement('span');
+            div.setAttribute('data-id', doc.id);
+            post.textContent = doc.data().post;
+            author.textContent = doc.data().author;
+            date.textContent = doc.data().time;
+            div.appendChild(post);
+            div.appendChild(author);
+            div.appendChild(date);
+            postList.appendChild(div);
+        }
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            db.collection('forum').add({
+                post: form.post.value,
+                author: form.auth.value,
+                time: new Date()
+            });
+            form.post.value = '';
+            form.auth.value = '';
+
+        })
+        // getting data
+        db.collection('forum').get().then(snapshot => {
+            snapshot.docs.forEach(doc => {
+                renderPost(doc);
+            });
+        });
+    </script>
+    <script src="/static/js/import.js"></script>
+    <script src="//code.tidio.co/mpdzdvjhz9xchfl4rqruup5ak5m6usxp.js" async></script>
 </body>
 
 </html>
