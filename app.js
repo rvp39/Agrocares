@@ -112,6 +112,9 @@ app.get("/features",function(req,res){
 app.get("/weather",function(req,res){
   res.render("weather");
 });
+app.get("/laborAd",function(req,res){
+  res.render("laborAd");
+});
 
 
 
