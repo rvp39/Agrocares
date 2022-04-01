@@ -58,66 +58,7 @@
     
         </div>
         </div>
-    <script>
-        const firebaseConfig = {
-        apiKey: "AIzaSyBChjbfDaGEYdTTe8b4d4CVVsdQYvLXIsg",
-        authDomain: "agrocares-9d407.firebaseapp.com",
-        projectId: "agrocares-9d407",
-        storageBucket: "agrocares-9d407.appspot.com",
-        messagingSenderId: "299439045102",
-        appId: "1:299439045102:web:1beb29d6701fe2af52b6ff",
-        measurementId: "G-38EZ7LT7LG"
-      };
 
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
-      db.settings({ timestampsInSnapshots: true });
-      const postList = document.querySelector('#display');
-      const form = document.querySelector('#add-post');
-      function renderPost(doc){
-          let div = document.createElement('div');
-          let name = document.createElement('span');
-          let surname=document.createElement('span');
-          let district=document.createElement('span');
-          let state=document.createElement('span');
-          let number=document.createElement('span');
-          div.setAttribute('data-id',doc.id);
-          name.textContent = doc.data().name;
-          surname.textContent = doc.data().surname;
-          district.textContent = doc.data().district;
-          state.textContent=doc.data().state;
-          number.textContent=doc.data().number;
-          div.appendChild(name);
-          div.appendChild(surname);
-          div.appendChild(district);
-          div.appendChild(state);
-          div.appendChild(number);
-          postList.appendChild(div);
-      }
-      form.addEventListener('submit',(e)=>{
-          e.preventDefault();
-          db.collection('labor').add({
-              name : form.Name.value,
-              surname : form.Surname.value,
-              district : form.District.value,
-              state : form.State.value,
-              number : form.Number.value,
-              
-          });
-          form.Name.value='';
-          form.Surname.value='';
-          form.District.value='';
-          form.State.value='';
-          form.Number.value='';
-          
-      })
-      // getting data
-     db.collection('labor').get().then(snapshot => {
-    snapshot.docs.forEach(doc => {
-     renderPost(doc);
- });
-});
-</script>
 </body>
 
 </html>
