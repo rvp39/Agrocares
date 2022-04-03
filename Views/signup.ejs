@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+    
+
     <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="css/nav.css">
     
@@ -74,23 +80,10 @@
            </div>
         </div>
      </div>
-     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-     <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+
+    
      <script>
-         const firebaseConfig = {
-            apiKey: "AIzaSyBChjbfDaGEYdTTe8b4d4CVVsdQYvLXIsg",
-            authDomain: "agrocares-9d407.firebaseapp.com",
-            projectId: "agrocares-9d407",
-            storageBucket: "agrocares-9d407.appspot.com",
-            messagingSenderId: "299439045102",
-            appId: "1:299439045102:web:1beb29d6701fe2af52b6ff",
-            measurementId: "G-38EZ7LT7LG"
-          };
 
-         firebase.initializeApp(firebaseConfig);
-
-         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.NONE);
 
          document
          .getElementById("signup")
@@ -103,14 +96,12 @@
                .auth()
                .createUserWithEmailAndPassword(login, password)
                .then(() => {
-               return firebase.auth().signOut();
-               })
-               .then(() => {
-               window.location.assign("/login");
+               window.location.assign("/");
                });
             
          });
      </script>
+     <script src="/js/index.js"></script>
      <script src="//code.tidio.co/mpdzdvjhz9xchfl4rqruup5ak5m6usxp.js" async></script>
 </body>
 </html>

@@ -1,57 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/5.0.3/firebase-firestore.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="/css/forum.css">
+    <link rel="stylesheet" href="css/forum.css">
     <title>Document</title>
 </head>
-
 <body>
     <div id="nav">
         <div class="nav-container">
             <ul class="nav-items">
                 <a href="/">
-                    <li id="logo">Agrocares</li>
+                    <li id="logo">
+                        Agrocares
+                    </li>
                 </a>
                 <ul class="nav-links">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/forum">Forum</a></li>
-                    <li><a href="/features">Features</a></li>
-                    <li>Profile</li>
+                    <li class="logged-in" style="display: none;"><a href="/">Home</a></li>
+                    <li class="logged-in" style="display: none;"><a href="/forum">Forum</a></li>
+                    <li class="logged-in" style="display: none;"><a href="/features">Features</a></li>
+                    <li class="logged-in" style="display: none;">
+                    <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Post</a>
+                      </li>
+                    <li class="logged-in" style="display: none;">Profile</li>
                 </ul>
-                <li>
-                    <div class="button">
-                        <a href="/login">
-                            <p class="button-text"> Login</p>
-                        </a>
+                <li class="lsb">
+                    <div class="button logged-out"   style="display: none;" >
+                   <a   class="grey-text modal-trigger" data-target="modal-signup">
+                       <p class="button-text"> 
+                           signup
+                        </p>
+                    </a>
                     </div>
+                    <div class="button logged-out"   style="display: none;" >
+                        <a class="grey-text modal-trigger" data-target="modal-login">
+                            <p class="button-text"> 
+                                Login
+                            </p>
+                        </a>
+                        </div>
+                        <div class="button loggedIn" id="logout" style="display: block;">
+                            <a href="/login">
+                                <p class="button-text"> 
+                                    LogOut
+                                </p>
+                            </a>
+                            </div>
                 </li>
+                
             </ul>
         </div>
     </div>
-    <div class="shade">
-        <div class="container">
-            <div id="create">
-                <form action="" id="add-post">
-                    <input type="text" name="post" id="post" placeholder="Write post here...">
-                    <input type="text" name="auth" id="auth" placeholder="author">
-                    <input type="submit" value="Post" id="submit">
-                </form>
-            </div>
-            <div id="display">
-
-            </div>
+    <form class="center-align admin-actions admin" style="margin: 40px auto; max-width: 300px; display: none;">
+        <input type="email" placeholder="User email" id="admin-email" required />
+        <button class="btn-small yellow darken-2 z-depth-0">Make admin</button>
+      </form>
+    <!-- SIGN UP MODAL -->
+  <div id="modal-signup" class="modal">
+    <div class="modal-content">
+      <h4>Sign up</h4><br />
+      <form id="signup-form">
+        <div class="input-field">
+          <input type="email" id="signup-email" required />
+          <label for="signup-email">Email address</label>
         </div>
+        <div class="input-field">
+          <input type="password" id="signup-password" required />
+          <label for="signup-password">Choose password</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-bio" required />
+          <label for="signup-bio">One Line Bio</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+        <p class="error pink-text center-align"></p>
+      </form>
     </div>
+  </div>
 
+  <!-- LOGIN MODAL -->
+  <div id="modal-login" class="modal">
+    <div class="modal-content">
+      <h4>Login</h4><br />
+      <form id="login-form">
+        <div class="input-field">
+          <input type="email" id="login-email" required />
+          <label for="login-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="login-password" required />
+          <label for="login-password">Your password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Login</button>
+        <p class="error pink-text center-align"></p>
+      </form>
+    </div>
+  </div>
+    <!-- CREATE GUIDE MODAL -->
+    <div id="modal-create" class="modal">
+        <div class="modal-content">
+          <h4>Create Post</h4><br />
+          <form id="create-post">
+            <div class="input-field">
+              <input type="text" id="title" required>
+              <label for="title">Post Title</label>
+            </div>
+            <div class="input-field">
+              <textarea id="content" class="materialize-textarea" required></textarea>
+              <label for="content">Post Content</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Create</button>
+          </form>
+        </div>
+      </div>
+  <div class="container" >
+    <ul class="collapsible z-depth-0 guides" style="border: none;">
+
+    </ul>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-functions.js"></script>
+    <script src="//code.tidio.co/mpdzdvjhz9xchfl4rqruup5ak5m6usxp.js" async></script>
     <script>
+        // Initialize Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyBChjbfDaGEYdTTe8b4d4CVVsdQYvLXIsg",
             authDomain: "agrocares-9d407.firebaseapp.com",
@@ -61,46 +137,19 @@
             appId: "1:299439045102:web:1beb29d6701fe2af52b6ff",
             measurementId: "G-38EZ7LT7LG"
         };
-
         firebase.initializeApp(firebaseConfig);
+        
+        // make auth and firestore references
+        const auth = firebase.auth();
         const db = firebase.firestore();
+        //const functions = firebase.functions();
+    
+        // update firestore settings
         db.settings({ timestampsInSnapshots: true });
-        const postList = document.querySelector('#display');
-        const form = document.querySelector('#add-post');
-        function renderPost(doc) {
-            let div = document.createElement('div');
-            let post = document.createElement('span');
-            let author = document.createElement('span');
-            let date = document.createElement('span');
-            div.setAttribute('data-id', doc.id);
-            post.textContent = doc.data().post;
-            author.textContent = doc.data().author;
-            date.textContent = doc.data().time;
-            div.appendChild(post);
-            div.appendChild(author);
-            div.appendChild(date);
-            postList.appendChild(div);
-        }
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            db.collection('forum').add({
-                post: form.post.value,
-                author: form.auth.value,
-                time: new Date()
-            });
-            form.post.value = '';
-            form.auth.value = '';
-
-        })
-        // getting data
-        db.collection('forum').get().then(snapshot => {
-            snapshot.docs.forEach(doc => {
-                renderPost(doc);
-            });
-        });
-    </script>
-    <script src="/static/js/import.js"></script>
-    <script src="//code.tidio.co/mpdzdvjhz9xchfl4rqruup5ak5m6usxp.js" async></script>
+      </script>
+      <script src="/js/forum.js"></script>
+      <script src="/js/authf.js"></script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
 </body>
-
 </html>

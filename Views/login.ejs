@@ -110,7 +110,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 .signInWithEmailAndPassword(login, password)
                 .then( cred => {
                   console.log(cred);
-                });
+                }).then(() => {
+               window.location.assign("/forum");
+               });
                 
               
             });

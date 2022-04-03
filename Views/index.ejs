@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
+    
     <link rel="stylesheet" href="css/nav.css">
     <link rel="stylesheet" href="css/index.css">
     <title>Agrocares</title>
@@ -17,7 +21,7 @@
                         Agrocares
                     </li>
                 </a>
-                <ul class="nav-links">
+                <ul class="nav-links" class="loggedIn" style="display: none;">
                     <li><a href="/">Home</a></li>
                     <li><a href="/forum">Forum</a></li>
                     <li><a href="/features">Features</a></li>
@@ -25,20 +29,27 @@
                     
                 </ul>
                 <li class="lsb">
-                    <div class="button">
+                    <div class="button loggedOut" style="display: block;">
                    <a href="/signup">
                        <p class="button-text"> 
                            signup
                         </p>
                     </a>
                     </div>
-                    <div class="button">
+                        <div class="button loggedOut" style="display: block;"> 
                         <a href="/login">
                             <p class="button-text"> 
                                 Login
                             </p>
                         </a>
                         </div>
+                        <div class="button loggedIn" id="logout" style="display: block;">
+                            <a href="/login">
+                                <p class="button-text"> 
+                                    LogOut
+                                </p>
+                            </a>
+                            </div>
                 </li>
                 
             </ul>
@@ -47,7 +58,8 @@
     
     <div id="1">
 
-    </div> 
+    </div>
+    <script src="/js/index.js"></script> 
     <script src="//code.tidio.co/mpdzdvjhz9xchfl4rqruup5ak5m6usxp.js" async></script>    
 </body>
 </html>
