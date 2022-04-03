@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-auth.js"></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="css/nav.css">
-    <link rel="stylesheet" href="css/index.css">
-    <title>Agrocares</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <title>Document</title>
 </head>
 <body>
     <div id="nav">
@@ -21,23 +18,25 @@
                         Agrocares
                     </li>
                 </a>
-                <ul class="nav-links" class="loggedIn" style="display: none;">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/forum">Forum</a></li>
-                    <li><a href="/features">Features</a></li>
-                    <li>Profile</li>
-                    
+                <ul class="nav-links">
+                    <li class="logged-in" style="display: none;"><a href="/">Home</a></li>
+                    <li class="logged-in" style="display: none;"><a href="/forum">Forum</a></li>
+                    <li class="logged-in" style="display: none;"><a href="/features">Features</a></li>
+                    <li class="logged-in" style="display: none;">
+                    <!-- <a href="#" class="grey-text modal-trigger" data-target="modal-create">Create Guide</a>
+                      </li> -->
+                    <li class="logged-in" style="display: none;">Profile</li>
                 </ul>
                 <li class="lsb">
-                    <div class="button loggedOut" style="display: block;">
-                   <a href="/signup">
+                    <div class="button logged-out"   style="display: none;" >
+                   <a   class="grey-text modal-trigger" data-target="modal-signup">
                        <p class="button-text"> 
                            signup
                         </p>
                     </a>
                     </div>
-                        <div class="button loggedOut" style="display: block;"> 
-                        <a href="/login">
+                    <div class="button logged-out"   style="display: none;" >
+                        <a class="grey-text modal-trigger" data-target="modal-login">
                             <p class="button-text"> 
                                 Login
                             </p>
@@ -55,11 +54,102 @@
             </ul>
         </div>
     </div>
-    
-    <div id="1">
-
+    <form class="center-align admin-actions admin" style="margin: 40px auto; max-width: 300px; display: none;">
+        <input type="email" placeholder="User email" id="admin-email" required />
+        <button class="btn-small yellow darken-2 z-depth-0">Make admin</button>
+      </form>
+    <!-- SIGN UP MODAL -->
+  <div id="modal-signup" class="modal">
+    <div class="modal-content">
+      <h4>Sign up</h4><br />
+      <form id="signup-form">
+        <div class="input-field">
+          <input type="email" id="signup-email" required />
+          <label for="signup-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="signup-password" required />
+          <label for="signup-password">Choose password</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-bio" required />
+          <label for="signup-bio">One Line Bio</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Sign up</button>
+        <p class="error pink-text center-align"></p>
+      </form>
     </div>
-    <script src="/js/index.js"></script> 
-    <script src="//code.tidio.co/mpdzdvjhz9xchfl4rqruup5ak5m6usxp.js" async></script>    
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="modal-login" class="modal">
+    <div class="modal-content">
+      <h4>Login</h4><br />
+      <form id="login-form">
+        <div class="input-field">
+          <input type="email" id="login-email" required />
+          <label for="login-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="login-password" required />
+          <label for="login-password">Your password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Login</button>
+        <p class="error pink-text center-align"></p>
+      </form>
+    </div>
+  </div>
+    <!-- CREATE GUIDE MODAL -->
+    <div id="modal-create" class="modal">
+        <div class="modal-content">
+          <h4>Create Guide</h4><br />
+          <form id="create-form">
+            <div class="input-field">
+              <input type="text" id="title" required>
+              <label for="title">Guide Title</label>
+            </div>
+            <div class="input-field">
+              <textarea id="content" class="materialize-textarea" required></textarea>
+              <label for="content">Guide Content</label>
+            </div>
+            <button class="btn yellow darken-2 z-depth-0">Create</button>
+          </form>
+        </div>
+      </div>
+  <div class="container" style="margin-top: 40px; display: none;" >
+    <ul class="collapsible z-depth-0 guides" style="border: none;">
+
+    </ul>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-functions.js"></script>
+    <script src="//code.tidio.co/mpdzdvjhz9xchfl4rqruup5ak5m6usxp.js" async></script>
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBChjbfDaGEYdTTe8b4d4CVVsdQYvLXIsg",
+            authDomain: "agrocares-9d407.firebaseapp.com",
+            projectId: "agrocares-9d407",
+            storageBucket: "agrocares-9d407.appspot.com",
+            messagingSenderId: "299439045102",
+            appId: "1:299439045102:web:1beb29d6701fe2af52b6ff",
+            measurementId: "G-38EZ7LT7LG"
+        };
+        firebase.initializeApp(firebaseConfig);
+        
+        // make auth and firestore references
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+        //const functions = firebase.functions();
+    
+        // update firestore settings
+        db.settings({ timestampsInSnapshots: true });
+      </script>
+      <script src="/js/index.js"></script>
+      <script src="/js/auth.js"></script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> 
 </body>
 </html>
